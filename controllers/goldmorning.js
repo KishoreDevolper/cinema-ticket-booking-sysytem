@@ -40,9 +40,9 @@ exports.seatexpand = async(req,res)=>{
 
     const fieldlist =seatnumber.split(",") 
     
-      const final = fieldlist
+    const final = fieldlist
   
-       const fieldsToInsert = final.map(field => 
+    const fieldsToInsert = final.map(field => 
             ({ movie_name:movie_name,seat_number:field,seat_availability:'available'})); 
               let result= await goldmorning.query().insert(fieldsToInsert);
               res.json(result)

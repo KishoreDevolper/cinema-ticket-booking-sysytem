@@ -36,31 +36,13 @@ exports.adminmoviepost = async(req,res)=>{
 exports.seatexpand = async(req,res)=>{
 
   try{
-    const seat_number_schema = Joi.object({
-      movie_name:Joi.string().required(),
-    })
-    const {er} = movie_name_schema.validate(screendata )
-    if(seat_error){
-      res.status(404).json({message:error})
-   } 
     const seat_number = req.query.seat_number
 
-    const {errors} = seat_number.validate(screendata )
+   const moviename = req.query.movie_name
+   
+   const fieldlist =seat_number.split(",") 
     
-    if(errors){
-       res.status(404).json({message:errors})
-    }
-    
-    const moviename = req.query.movie_name
-
-    const {error} = movie_name.validate(screendata )
-    
-    if(error){
-       res.status(404).json({message:error})
-    }
-      const fieldlist =seat_number.split(",") 
-    
-      const final = fieldlist
+   const final = fieldlist
   
        const fieldsToInsert = final.map(field => 
             ({ movie_name:moviename,seat_number:field,seat_availability:'available'})); 
@@ -92,8 +74,8 @@ exports.userticket = async(req,res)=>{
        .then(specific=>{
          res.json({
           name:specific.name,
-          movie_name:specific.Screen_Gold_Morning[0].movie_name,
-          seat_number:specific.Screen_Gold_Morning[0].seat_number,
+          movie_name:specific.Screen_Silver_Morning[0].movie_name,
+          seat_number:specific.Screen_Silver_Morning[0].seat_number,
           show_time:'morning',
           screen_name:"Silver"
 
